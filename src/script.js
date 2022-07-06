@@ -18,9 +18,12 @@ const parameters = {
   materialColor: '#ffeded'
 };
 
-gui.addColor(parameters, 'materialColor').onChange((val) => {
-  particlesMaterial.color.set(val);
-});
+gui
+  .addColor(parameters, 'materialColor')
+  .name('particles color')
+  .onChange((val) => {
+    particlesMaterial.color.set(val);
+  });
 
 /**
  * Base
@@ -142,7 +145,11 @@ const geometry = mergeBufferGeometries([coneTop, middle, coneBottom]);
 // Notice I am using flat shading in the material, to give it a faceted look.
 // Most ThreeJS geometries will appear smooth by default.
 const material2 = new THREE.MeshNormalMaterial({ flatShading: true });
-const mesh2 = new THREE.Mesh(geometry, material2);
+// const mesh2 = new THREE.Mesh(geometry, material2);
+const mesh2 = new THREE.Mesh(
+  new THREE.BoxBufferGeometry(15, 15, 15),
+  createTextureMaterial(FlakesTexture, { x: 10, y: 10 }, new THREE.Vector2(0.15, 0.15), 0x00ff00)
+);
 mesh2.scale.set(0.1, 0.1, 0.1);
 
 // scale the mesh
@@ -209,7 +216,7 @@ scene.add(cameraGroup);
  */
 // Base camera
 const camera = new THREE.PerspectiveCamera(35, sizes.width / sizes.height, 0.1, 100);
-camera.position.z = 6;
+camera.position.z = 7;
 cameraGroup.add(camera);
 
 /**
