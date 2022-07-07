@@ -7,6 +7,9 @@ import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader';
 import { FlakesTexture } from './FlakesTexture';
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry';
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader';
+
+const onMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
 /**
  * Debug
  */
@@ -74,7 +77,11 @@ function makeSpehre(hdrmap, color, position, scale) {
   const ballGeo = new THREE.SphereGeometry(100, 64, 64);
   const ballMat = new THREE.MeshPhysicalMaterial(ballMaterial);
   const ballMesh = new THREE.Mesh(ballGeo, ballMat);
-  ballMesh.position.set(position.x, position.y, position.z);
+  if (onMobile) {
+    ballMesh.position.set(position.x - 80, position.y, position.z - 1);
+  } else {
+    ballMesh.position.set(position.x, position.y, position.z);
+  }
   ballMesh.scale.set(scale.x, scale.y, scale.z);
   ballMesh.material.shading = THREE.SmoothShading;
   return ballMesh;
@@ -173,10 +180,10 @@ const geometry = mergeBufferGeometries([coneTop, middle, coneBottom]);
 const material2 = new THREE.MeshNormalMaterial({ flatShading: true });
 // const mesh2 = new THREE.Mesh(geometry, material2);
 const mesh2 = new THREE.Mesh(
-  new THREE.BoxBufferGeometry(15, 15, 15),
+  new THREE.TorusBufferGeometry(0.6, 0.25, 100, 64),
   createTextureMaterial(FlakesTexture, { x: 10, y: 10 }, new THREE.Vector2(0.15, 0.15), 0x00ff00)
 );
-mesh2.scale.set(0.1, 0.1, 0.1);
+mesh2.scale.set(1.1, 1.1, 1.1);
 
 // scale the mesh
 // mesh2.scale.set(2, 2, 2);
@@ -184,13 +191,13 @@ mesh2.scale.set(0.1, 0.1, 0.1);
 const sectionMeshes = [mesh1, mesh2, mesh3];
 
 mesh1.position.y = -objectDistance * 0;
-mesh1.position.x = 2;
+mesh1.position.x = onMobile ? 0 : 2;
 
 mesh2.position.y = -objectDistance * 1;
-mesh2.position.x = -2;
+mesh2.position.x = onMobile ? 0 : -2;
 
 mesh3.position.y = -objectDistance * 2;
-mesh3.position.x = 2;
+mesh3.position.x = onMobile ? 0 : 2;
 
 scene.add(mesh1, mesh2, mesh3);
 
