@@ -5,6 +5,8 @@ import gsap from 'gsap';
 import { mergeBufferGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils';
 import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader';
 import { FlakesTexture } from './FlakesTexture';
+import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry';
+import { FontLoader } from 'three/examples/jsm/loaders/FontLoader';
 /**
  * Debug
  */
@@ -77,6 +79,30 @@ function makeSpehre(hdrmap, color, position, scale) {
   ballMesh.material.shading = THREE.SmoothShading;
   return ballMesh;
 }
+
+// const fontLoader = new FontLoader();
+
+// fontLoader.load('/fonts/bungee_outline.typeface.json', (font) => {
+//   const textGeometry = new TextGeometry('Tal Hayut', {
+//     font,
+//     size: 0.5,
+//     height: 0.2,
+//     curveSegments: 6,
+//     bevelEnabled: true,
+//     bevelThickness: 0.03,
+//     bevelSize: 0.02,
+//     bevelOffset: 0,
+//     bevelSegments: 4
+//   });
+
+//   console.log(font);
+//   textGeometry.center();
+
+//   // const material = new THREE.MeshNormalMaterial();
+//   const material = createTextureMaterial(FlakesTexture, {x: 10, y: 10}, new THREE.Vector2(0.15, 0.15), 0xffff00)
+//   const mesh = new THREE.Mesh(textGeometry, material);
+//   scene.add(mesh);
+// });
 
 new RGBELoader().setPath('textures/').load('cayley_interior_4k.hdr', function (hdrmap) {
   const envmap = envmaploader.fromCubemap(hdrmap);
@@ -239,12 +265,11 @@ window.addEventListener('scroll', () => {
   if (newSection !== currentSection) {
     currentSection = newSection;
     const titles = [...document.querySelectorAll('h1')];
-    const effects = [{ y: 100 }, { rotateX: -180 }, { rotateY: 180 }];
+    const effects = [{ y: -1000, x: 0, z: 0 }, { x: 200 }, { x: -1000 }];
     gsap.from(`.${titles[currentSection].className}`, {
       duration: 1,
       stagger: 0.2,
-      scale: 3,
-      autoAlpha: 2,
+      // scale: 3,
       ...effects[currentSection]
     });
 

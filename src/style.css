@@ -1,16 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Bungee+Shade&family=Inter:wght@100;300;500&family=Rubik+Wet+Paint&display=swap');
+
 * {
   margin: 0;
   padding: 0;
 }
 
-/* html,
-body
-{
-    overflow: hidden;
-} */
+html,
+body {
+  width: 100vw;
+  height: 100vh;
+}
+
+h1 {
+  font-family: 'Bungee Shade';
+  font-size: 72px;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.title_1 {
+  background-image: linear-gradient(to top right, rgba(255, 0, 255, .5), rgba(255, 0, 255, .8), rgba(255, 0, 255, 1), rgba(255, 255, 255, .9));
+}
+
+.title_2 {
+  background-image: linear-gradient(60deg, #e21143, #ffb03a);
+}
+
+.title_3 {
+  background-image: linear-gradient(60deg, #e21143, #ffb03a);
+}
 
 html {
-  background: #1e1a20;
+  background: #5c258d;
+  /* background: -webkit-linear-gradient(to top, #4389a2, #5c258d);
+  background: linear-gradient(to bottom, #4389a2, #5c258d); */
+  /* background: -webkit-linear-gradient(to top, #614385, #516395);
+  background: linear-gradient(to bottom, #614385, #516395); */
+
+  background: #03001e; /* fallback for old browsers */
+  background: radial-gradient(#1e1e1e, #000000);
+  /* background: radial-gradient(
+    #1e1e1e
+    #100d25, */
+  /* ); */
 }
 
 .webgl {
