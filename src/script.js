@@ -181,7 +181,7 @@ const material2 = new THREE.MeshNormalMaterial({ flatShading: true });
 // const mesh2 = new THREE.Mesh(geometry, material2);
 const mesh2 = new THREE.Mesh(
   new THREE.TorusBufferGeometry(0.6, 0.25, 100, 64),
-  createTextureMaterial(FlakesTexture, { x: 10, y: 10 }, new THREE.Vector2(0.15, 0.15), 0x00ff00)
+  createTextureMaterial(FlakesTexture, { x: 10, y: 10 }, new THREE.Vector2(0.15, 0.15), 0xffffff * Math.random())
 );
 mesh2.scale.set(1.1, 1.1, 1.1);
 
